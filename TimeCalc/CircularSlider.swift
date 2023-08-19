@@ -13,6 +13,9 @@ struct CircularSlider: View {
     @State var progress: CGFloat = 0
     @State private var angle: Double = 0
     
+    @State private var rotations: Int = 0
+    @State private var previousAngle: Double = 0
+    
     var body: some View {
         ZStack {
             
@@ -44,6 +47,8 @@ struct CircularSlider: View {
                 .gesture(
                     DragGesture()
                         .onChanged { value in
+                            self.previousAngle = angle
+                            
                             let vector = CGVector(dx: value.location.x, dy: value.location.y)
                             let radians = atan2(vector.dy - 20, vector.dx - 20)
                             var angle = radians * 180 / .pi
@@ -52,16 +57,33 @@ struct CircularSlider: View {
                                 angle = 360 + angle
                             }
                             
+                            let maxAngle = Double((rotations + 1) * 360)
+                            let minAngle = Double(rotations * 360)
+                            
+                            if previousAngle.inRange(maxAngle - 45 ... maxAngle) && Double(angle + CGFloat(rotations * 360)).inRange(minAngle ... minAngle + 45) {
+                                rotations += 1
+                            }
+                            
+                            if previousAngle.inRange(minAngle ... minAngle + 45) && Double(angle + CGFloat(rotations * 360)).inRange(maxAngle - 45 ... maxAngle) {
+                                rotations -= 1
+                            }
+                            
                             withAnimation(.linear(duration: 0.15)) {
+                                angle = Double(angle) + Double(rotations * 360)
                                 let progress = angle / 360
-                                print(progress)
                                 self.progress = progress
-                                self.angle = Double(angle)
+                                self.angle = angle
                             }
                         }
                 )
                 .rotationEffect(.degrees(-90))
         }
+    }
+}
+
+extension Double {
+    func inRange(_ range: ClosedRange<Double>) -> Bool {
+        return self >= range.lowerBound && self <= range.upperBound
     }
 }
 
