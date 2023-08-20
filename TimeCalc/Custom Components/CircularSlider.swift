@@ -10,7 +10,8 @@ import SwiftUI
 struct CircularSlider: View {
     
     @State private var size: CGFloat = 200
-    @State var progress: CGFloat = 0
+    @Binding var progress: CGFloat
+    @Binding var unit: CircularSliderUnit
     @State private var angle: Double = 0
     
     @State private var rotations: Int = 0
@@ -20,12 +21,12 @@ struct CircularSlider: View {
         ZStack {
             
             ZStack {
-                ForEach(0 ... 12, id: \.self) { index in
+                ForEach(0 ... unit.intValue, id: \.self) { index in
                     Rectangle()
                         .fill(Color.primary)
                         .frame(width: 2, height: 15)
                         .offset(y: size / 2 - 35)
-                        .rotationEffect(Angle(degrees: Double(index) * 30))
+                        .rotationEffect(Angle(degrees: Double(index) * Double(360 / unit.intValue)))
                 }
             }
             
@@ -82,12 +83,27 @@ struct CircularSlider: View {
                                 let progress = angle / 360
                                 self.progress = progress
                                 self.angle = angle
-                                print(progress)
                             }
                         }
                 )
                 .rotationEffect(.degrees(-90))
         }
+    }
+}
+
+enum CircularSliderUnit: String {
+    case seconds = "60s"
+    case minutes = "60m"
+    case hours = "12h"
+    case days = "7d"
+    case weeks = "51w"
+    case months = "12M"
+    case years = "10y"
+}
+extension CircularSliderUnit {
+    var intValue: Int {
+        let stringInt = self.rawValue.dropLast()
+        return Int(stringInt) ?? 1
     }
 }
 
@@ -98,5 +114,5 @@ extension Double {
 }
 
 #Preview {
-    CircularSlider()
+    CircularSlider(progress: .constant(0), unit: .constant(.hours))
 }
