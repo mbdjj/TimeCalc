@@ -20,12 +20,12 @@ struct CircularSlider: View {
         ZStack {
             
             ZStack {
-                ForEach(0 ... 24, id: \.self) { index in
+                ForEach(0 ... 12, id: \.self) { index in
                     Rectangle()
-                        .fill(index % 2 == 0 ? Color.primary : .gray)
-                        .frame(width: 2, height: index % 2 == 0 ? 15 : 4)
+                        .fill(Color.primary)
+                        .frame(width: 2, height: 15)
                         .offset(y: size / 2 - 35)
-                        .rotationEffect(Angle(degrees: Double(index) * 15))
+                        .rotationEffect(Angle(degrees: Double(index) * 30))
                 }
             }
             
@@ -35,9 +35,18 @@ struct CircularSlider: View {
             
             Circle()
                 .trim(from: 0, to: progress)
-                .stroke(Color.green.opacity(0.2), style: StrokeStyle(lineWidth: 40, lineCap: .round, lineJoin: .round))
+                .stroke(Color.green.opacity(0.5), style: StrokeStyle(lineWidth: 40, lineCap: .round, lineJoin: .round))
                 .frame(width: size, height: size)
                 .rotationEffect(.degrees(-90))
+            
+            if progress < 0 {
+                Circle()
+                    .trim(from: 0, to: abs(progress))
+                    .stroke(Color.red.opacity(0.5), style: StrokeStyle(lineWidth: 40, lineCap: .round, lineJoin: .round))
+                    .frame(width: size, height: size)
+                    .rotationEffect(.degrees(90))
+                    .rotation3DEffect(.degrees(180), axis: (x: 1.0, y: 0.0, z: 0.0))
+            }
             
             Circle()
                 .foregroundStyle(.primary)
@@ -73,6 +82,7 @@ struct CircularSlider: View {
                                 let progress = angle / 360
                                 self.progress = progress
                                 self.angle = angle
+                                print(progress)
                             }
                         }
                 )
