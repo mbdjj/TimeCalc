@@ -44,7 +44,7 @@ struct CircularSlider: View {
                 .frame(width: size, height: size)
                 .rotationEffect(.degrees(-90))
             
-            if progress < 0 {
+            if progress <= 0 {
                 Circle()
                     .trim(from: 0, to: abs(progress))
                     .stroke(Color.red.opacity(0.5), style: StrokeStyle(lineWidth: 40, lineCap: .round, lineJoin: .round))
@@ -93,6 +93,14 @@ struct CircularSlider: View {
                         .onEnded { _ in
                             self.gestureHappening = false
                             selectionFinished()
+                            
+                            withAnimation(.spring()) {
+                                self.angle = 0
+                                self.progress = 0
+                                
+                                self.rotations = 0
+                                self.previousAngle = 0
+                            }
                         }
                 )
                 .rotationEffect(.degrees(-90))
