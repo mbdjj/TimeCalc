@@ -27,8 +27,13 @@ struct CalculationView: View {
                 .font(.title)
                 .bold()
                 .padding(.bottom)
+                .contentTransition(.numericText())
+                .sensoryFeedback(.increase, trigger: sliderValue)
             
-            CircularSlider(progress: $model.progress, unit: $model.sliderUnit)
+            CircularSlider(progress: $model.progress, unit: $model.sliderUnit) {
+                let nonAbs: Double = model.progress >= 0 ? 1 : -1
+                print(sliderValue * nonAbs)
+            }
                 .padding(.bottom, 50)
         }
     }

@@ -17,6 +17,10 @@ struct CircularSlider: View {
     @State private var rotations: Int = 0
     @State private var previousAngle: Double = 0
     
+    @State private var gestureHappening: Bool = false
+    
+    let selectionFinished: () -> ()
+    
     var body: some View {
         ZStack {
             
@@ -55,9 +59,10 @@ struct CircularSlider: View {
                 .offset(x: size / 2)
                 .rotationEffect(.degrees(angle))
                 .gesture(
-                    DragGesture()
+                    DragGesture(minimumDistance: 0)
                         .onChanged { value in
-                            self.previousAngle = angle
+                            self.gestureHappening = true
+                            self.previousAngle = self.angle
                             
                             let vector = CGVector(dx: value.location.x, dy: value.location.y)
                             let radians = atan2(vector.dy - 20, vector.dx - 20)
@@ -85,8 +90,13 @@ struct CircularSlider: View {
                                 self.angle = angle
                             }
                         }
+                        .onEnded { _ in
+                            self.gestureHappening = false
+                            selectionFinished()
+                        }
                 )
                 .rotationEffect(.degrees(-90))
+                .sensoryFeedback(.start, trigger: gestureHappening)
         }
     }
 }
@@ -114,5 +124,7 @@ extension Double {
 }
 
 #Preview {
-    CircularSlider(progress: .constant(0), unit: .constant(.hours))
+    CircularSlider(progress: .constant(0), unit: .constant(.hours)) {
+        
+    }
 }
