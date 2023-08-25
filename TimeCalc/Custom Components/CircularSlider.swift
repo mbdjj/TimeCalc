@@ -106,6 +106,7 @@ struct CircularSlider: View {
                 .rotationEffect(.degrees(-90))
                 .sensoryFeedback(.start, trigger: gestureHappening)
         }
+        .padding(40)
     }
 }
 
@@ -114,7 +115,6 @@ enum CircularSliderUnit: String {
     case minutes = "60m"
     case hours = "12h"
     case days = "7d"
-    case weeks = "51w"
     case months = "12M"
     case years = "10y"
 }
@@ -122,6 +122,28 @@ extension CircularSliderUnit {
     var intValue: Int {
         let stringInt = self.rawValue.dropLast()
         return Int(stringInt) ?? 1
+    }
+    
+    var name: String {
+        switch self {
+        case .seconds: "seconds"
+        case .minutes: "minutes"
+        case .hours: "hours"
+        case .days: "days"
+        case .months: "months"
+        case .years: "years"
+        }
+    }
+    
+    var component: Calendar.Component {
+        switch self {
+        case .seconds: .second
+        case .minutes: .minute
+        case .hours: .hour
+        case .days: .day
+        case .months: .month
+        case .years: .year
+        }
     }
 }
 
