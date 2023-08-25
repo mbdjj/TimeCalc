@@ -17,14 +17,18 @@ struct SliderUnitButtons: View {
             ForEach(unitOptions, id: \.self) { unit in
                 if sliderUnit == unit {
                     Button {
-                        sliderUnit = unit
+                        withAnimation {
+                            sliderUnit = unit
+                        }
                     } label: {
                         Text(unit.name.capitalized)
                     }
                     .buttonStyle(.borderedProminent)
                 } else {
                     Button {
-                        sliderUnit = unit
+                        withAnimation {
+                            sliderUnit = unit
+                        }
                     } label: {
                         Text(unit.name.capitalized)
                     }
