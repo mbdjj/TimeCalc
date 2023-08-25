@@ -13,12 +13,31 @@ struct CalculationView: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                
+                Button {
+                    withAnimation {
+                        model.timeDate = .now
+                    }
+                } label: {
+                    Text("Now")
+                }
+                .padding(.horizontal)
+                .padding(.top)
+                .buttonStyle(.bordered)
+                .buttonBorderShape(.capsule)
+            }
             Picker("", selection: $model.calculationMode) {
                 Text("Date & Time").tag(0)
                 Text("Time").tag(1)
             }
             .pickerStyle(.segmented)
-            .padding()
+            .padding(.horizontal)
+            
+            Text(model.timeDate.formatted(date: .omitted, time: .shortened))
+                .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                .contentTransition(.numericText())
             
             Spacer()
             
@@ -32,7 +51,10 @@ struct CalculationView: View {
             
             CircularSlider(progress: $model.progress, unit: $model.sliderUnit) {
                 let nonAbs: Double = model.progress >= 0 ? 1 : -1
-                print(sliderValue * nonAbs)
+                
+                withAnimation {
+                    model.addToDate(sliderValue * nonAbs, unit: .minute)
+                }
             }
                 .padding(.bottom, 50)
         }
