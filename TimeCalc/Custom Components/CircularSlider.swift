@@ -25,11 +25,11 @@ struct CircularSlider: View {
         ZStack {
             
             ZStack {
-                ForEach(0 ... unit.intValue, id: \.self) { index in
+                ForEach(0 ..< unit.intValue, id: \.self) { index in
                     Rectangle()
                         .fill(Color.primary)
                         .frame(width: 2, height: 15)
-                        .offset(y: size / 2 - 35)
+                        .offset(y: -size / 2 + 35)
                         .rotationEffect(Angle(degrees: Double(index) * Double(360 / unit.intValue)))
                 }
             }
@@ -145,6 +145,11 @@ extension CircularSliderUnit {
         case .years: .year
         }
     }
+}
+
+extension [CircularSliderUnit] {
+    static let timeOnly: [CircularSliderUnit] = [.seconds, .minutes, .hours]
+    static let dateAndTime: [CircularSliderUnit] = [.minutes, .hours, .days, .months, .years]
 }
 
 extension Double {

@@ -10,7 +10,7 @@ import SwiftUI
 struct SliderUnitButtons: View {
     
     @Binding var sliderUnit: CircularSliderUnit
-    @Binding var unitOptions: [CircularSliderUnit]
+    var unitOptions: [CircularSliderUnit]
     
     var body: some View {
         HStack {
@@ -22,6 +22,7 @@ struct SliderUnitButtons: View {
                         }
                     } label: {
                         Text(unit.name.capitalized)
+                            .lineLimit(1)
                     }
                     .buttonStyle(.borderedProminent)
                 } else {
@@ -31,6 +32,7 @@ struct SliderUnitButtons: View {
                         }
                     } label: {
                         Text(unit.name.capitalized)
+                            .lineLimit(1)
                     }
                     .buttonStyle(.bordered)
                 }
@@ -40,5 +42,5 @@ struct SliderUnitButtons: View {
 }
 
 #Preview {
-    SliderUnitButtons(sliderUnit: .constant(.minutes), unitOptions: .constant([.seconds, .minutes, .hours]))
+    SliderUnitButtons(sliderUnit: .constant(.minutes), unitOptions: [.seconds, .minutes, .hours])
 }

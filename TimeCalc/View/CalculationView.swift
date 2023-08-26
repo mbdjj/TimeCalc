@@ -17,13 +17,23 @@ struct CalculationView: View {
                 Spacer()
                 
                 Button {
+                    
+                } label: {
+                    Image(systemName: "bell")
+                        .symbolVariant(.fill)
+                }
+                .padding(.top)
+                .buttonStyle(.bordered)
+                .buttonBorderShape(.circle)
+                
+                Button {
                     withAnimation {
                         model.timeDate = .now
                     }
                 } label: {
                     Text("Now")
                 }
-                .padding(.horizontal)
+                .padding(.trailing)
                 .padding(.top)
                 .buttonStyle(.bordered)
                 .buttonBorderShape(.capsule)
@@ -35,10 +45,26 @@ struct CalculationView: View {
             .pickerStyle(.segmented)
             .padding(.horizontal)
             
-            Text(model.timeDate.formatted(date: .omitted, time: .shortened))
-                .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                .contentTransition(.numericText())
-                .padding(.top)
+            HStack {
+                if model.calculationMode == 1 && model.timeDate.formatted(date: .abbreviated, time: .omitted) != Date().formatted(date: .abbreviated, time: .omitted) {
+                    let symbol = Calendar.current.numberOfDaysBetween(Date(), and: model.timeDate) > 0 ? "+" : ""
+                    Text("\(symbol)\(Calendar.current.numberOfDaysBetween(Date(), and: model.timeDate))")
+                        .bold()
+                        .opacity(0)
+                }
+                
+                Text(model.timeDate.formatted(date: model.calculationMode == 1 ? .omitted : .abbreviated, time: model.sliderUnit == .seconds ? .standard : .shortened))
+                    .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                    .contentTransition(.numericText())
+                    .padding(.top)
+                    .multilineTextAlignment(.center)
+                
+                if model.calculationMode == 1 && model.timeDate.formatted(date: .abbreviated, time: .omitted) != Date().formatted(date: .abbreviated, time: .omitted) {
+                    let symbol = Calendar.current.numberOfDaysBetween(Date(), and: model.timeDate) > 0 ? "+" : ""
+                    Text("\(symbol)\(Calendar.current.numberOfDaysBetween(Date(), and: model.timeDate))")
+                        .bold()
+                }
+            }
             
             let sliderValue: Double = floor(abs(model.progress * Double(model.sliderUnit.intValue)))
             let nonAbs: Double = model.progress >= 0 ? 1 : -1
@@ -61,7 +87,8 @@ struct CalculationView: View {
             
             Spacer()
             
-            SliderUnitButtons(sliderUnit: $model.sliderUnit, unitOptions: .constant([.seconds, .minutes, .hours]))
+            SliderUnitButtons(sliderUnit: $model.sliderUnit, unitOptions: model.unitOptions)
+                .minimumScaleFactor(0.6)
             
             CircularSlider(progress: $model.progress, unit: $model.sliderUnit) {
                 withAnimation {

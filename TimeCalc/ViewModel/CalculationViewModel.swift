@@ -14,7 +14,21 @@ import SwiftUI
     
     var timeDate: Date = .now
     
+    var unitOptions: [CircularSliderUnit] {
+        calculationMode == 1 ? [CircularSliderUnit].timeOnly : [CircularSliderUnit].dateAndTime
+    }
+    
     @MainActor func addToDate(_ value: Double, unit: Calendar.Component) {
         timeDate = Calendar.current.date(byAdding: unit, value: Int(value), to: timeDate) ?? .now
+    }
+}
+
+extension Calendar {
+    func numberOfDaysBetween(_ from: Date, and to: Date) -> Int {
+        let fromDate = startOfDay(for: from)
+        let toDate = startOfDay(for: to)
+        let numberOfDays = dateComponents([.day], from: fromDate, to: toDate)
+        
+        return numberOfDays.day!
     }
 }
