@@ -13,6 +13,7 @@ import SwiftUI
     var sliderUnit: CircularSliderUnit = .minutes
     
     var timeDate: Date = .now
+    var calcHistory: String = String(format: "%.0f", Date().timeIntervalSince1970)
     
     var unitOptions: [CircularSliderUnit] {
         calculationMode == 1 ? [CircularSliderUnit].timeOnly : [CircularSliderUnit].dateAndTime

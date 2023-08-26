@@ -124,6 +124,10 @@ extension CircularSliderUnit {
         return Int(stringInt) ?? 1
     }
     
+    var symbol: String {
+        return "\(self.rawValue.last ?? "e")"
+    }
+    
     var name: String {
         switch self {
         case .seconds: "seconds"

@@ -29,6 +29,7 @@ struct CalculationView: View {
                 Button {
                     withAnimation {
                         model.timeDate = .now
+                        model.calcHistory = String(format: "%.0f", Date().timeIntervalSince1970)
                     }
                 } label: {
                     Text("Now")
@@ -39,7 +40,7 @@ struct CalculationView: View {
                 .buttonBorderShape(.capsule)
             }
             Picker("", selection: $model.calculationMode) {
-                Text("Date & Time").tag(0)
+                Text("Date").tag(0)
                 Text("Time").tag(1)
             }
             .pickerStyle(.segmented)
@@ -93,6 +94,10 @@ struct CalculationView: View {
             CircularSlider(progress: $model.progress, unit: $model.sliderUnit) {
                 withAnimation {
                     model.addToDate(sliderValue * nonAbs, unit: model.sliderUnit.component)
+                    
+                    let sign = nonAbs.sign == .plus ? "+" : "-"
+                    model.calcHistory += ".\(sign)\(model.sliderUnit.symbol)\(Int(sliderValue))"
+                    print(model.calcHistory)
                 }
             }
                 .padding(.bottom, 50)
