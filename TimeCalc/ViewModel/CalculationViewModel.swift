@@ -16,7 +16,7 @@ import SwiftUI
     var calcHistory: String = String(format: "%.0f", Date().timeIntervalSince1970)
     
     var unitOptions: [CircularSliderUnit] {
-        calculationMode == 1 ? [CircularSliderUnit].timeOnly : [CircularSliderUnit].dateAndTime
+        calculationMode == 1 ? [CircularSliderUnit].timeOnly : [CircularSliderUnit].dateOnly
     }
     
     @MainActor func addToDate(_ value: Double, unit: Calendar.Component) {

@@ -153,6 +153,7 @@ extension CircularSliderUnit {
 
 extension [CircularSliderUnit] {
     static let timeOnly: [CircularSliderUnit] = [.seconds, .minutes, .hours]
+    static let dateOnly: [CircularSliderUnit] = [.days, .months, .years]
     static let dateAndTime: [CircularSliderUnit] = [.minutes, .hours, .days, .months, .years]
 }
 

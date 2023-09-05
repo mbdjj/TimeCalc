@@ -76,7 +76,7 @@ struct CalculationView: View {
                     .bold()
                     .padding(.bottom)
                 
-                Text(String(format: "%.0f", sliderValue))
+                Text("\(String(format: "%.0f", sliderValue)) \(model.sliderUnit.name)")
                     .font(.title)
                     .bold()
                     .padding(.bottom)
