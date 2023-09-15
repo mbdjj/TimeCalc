@@ -66,6 +66,9 @@ struct CalculationView: View {
                         .bold()
                 }
             }
+            .onTapGesture {
+                model.showDatePicker = true
+            }
             
             let sliderValue: Double = floor(abs(model.progress * Double(model.sliderUnit.intValue)))
             let nonAbs: Double = model.progress >= 0 ? 1 : -1
@@ -88,6 +91,12 @@ struct CalculationView: View {
             
             Spacer()
             
+            Button {
+                model.showCalcHistory = true
+            } label: {
+                Text("Calculation history")
+            }
+            
             SliderUnitButtons(sliderUnit: $model.sliderUnit, unitOptions: model.unitOptions)
                 .minimumScaleFactor(0.6)
             
@@ -101,6 +110,24 @@ struct CalculationView: View {
                 }
             }
                 .padding(.bottom, 50)
+        }
+        .sheet(isPresented: $model.showCalcHistory) {
+            Text("Calculation history")
+                .presentationDetents([.medium, .large])
+        }
+        .sheet(isPresented: $model.showDatePicker) {
+            VStack {
+                DatePicker("", selection: $model.timeDate)
+                    .labelsHidden()
+                    .datePickerStyle(.graphical)
+                    .padding()
+                    .onChange(of: model.timeDate) { _, _ in
+                        if model.showDatePicker {
+                            model.clearHistory()
+                        }
+                    }
+            }
+            .presentationDetents([.medium])
         }
     }
 }

@@ -15,12 +15,19 @@ import SwiftUI
     var timeDate: Date = .now
     var calcHistory: String = String(format: "%.0f", Date().timeIntervalSince1970)
     
+    var showDatePicker: Bool = false
+    var showCalcHistory: Bool = false
+    
     var unitOptions: [CircularSliderUnit] {
         calculationMode == 1 ? [CircularSliderUnit].timeOnly : [CircularSliderUnit].dateOnly
     }
     
     @MainActor func addToDate(_ value: Double, unit: Calendar.Component) {
         timeDate = Calendar.current.date(byAdding: unit, value: Int(value), to: timeDate) ?? .now
+    }
+    
+    func clearHistory() {
+        calcHistory = String(format: "%.0f", timeDate.timeIntervalSince1970)
     }
 }
 
