@@ -110,7 +110,7 @@ struct CircularSlider: View {
     }
 }
 
-enum CircularSliderUnit: String {
+enum CircularSliderUnit: String, CaseIterable {
     case seconds = "60s"
     case minutes = "60m"
     case hours = "12h"
