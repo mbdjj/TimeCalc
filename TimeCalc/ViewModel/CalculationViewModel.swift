@@ -8,12 +8,13 @@
 import SwiftUI
 
 @Observable class CalculationViewModel {
+    
     var calculationMode = 1
     var progress: CGFloat = 0
     var sliderUnit: CircularSliderUnit = .minutes
     
     var timeDate: Date = .now
-    var calcHistory: String = String(format: "%.0f", Date().timeIntervalSince1970)
+    var calcHistory: String = String(format: "%.0f", floor(Date().timeIntervalSince1970))
     
     var showDatePicker: Bool = false
     var showCalcHistory: Bool = false
@@ -27,7 +28,7 @@ import SwiftUI
     }
     
     func clearHistory() {
-        calcHistory = String(format: "%.0f", timeDate.timeIntervalSince1970)
+        calcHistory = String(format: "%.0f", floor(timeDate.timeIntervalSince1970))
     }
 }
 
