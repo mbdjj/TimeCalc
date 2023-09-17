@@ -21,6 +21,7 @@ struct CalculationHistoryView: View {
         NavigationStack {
             List {
                 HStack {
+                    Spacer()
                     VStack {
                         Text(calcItem.startDate.formatted(date: .abbreviated, time: .omitted))
                         Text(calcItem.startDate.formatted(date: .omitted, time: calcItem.usedSeconds ? .standard : .shortened))
@@ -30,7 +31,9 @@ struct CalculationHistoryView: View {
                         Text(calcItem.endDate.formatted(date: .abbreviated, time: .omitted))
                         Text(calcItem.endDate.formatted(date: .omitted, time: calcItem.usedSeconds ? .standard : .shortened))
                     }
+                    Spacer()
                 }
+                .bold()
             }
         }
     }
