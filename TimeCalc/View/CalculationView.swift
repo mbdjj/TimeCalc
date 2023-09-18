@@ -29,7 +29,7 @@ struct CalculationView: View {
                 Button {
                     withAnimation {
                         model.timeDate = .now
-                        model.calcHistory = String(format: "%.0f", Date().timeIntervalSince1970)
+                        model.clearHistory()
                     }
                 } label: {
                     Text("Now")
@@ -105,14 +105,14 @@ struct CalculationView: View {
                     model.addToDate(sliderValue * nonAbs, unit: model.sliderUnit.component)
                     
                     let sign = nonAbs.sign == .plus ? "+" : "-"
-                    model.calcHistory += ".\(sign)\(model.sliderUnit.symbol)\(Int(sliderValue))"
+                    model.calcHistory[model.calcHistory.count - 1] += ".\(sign)\(model.sliderUnit.symbol)\(Int(sliderValue))"
                     print(model.calcHistory)
                 }
             }
                 .padding(.bottom, 50)
         }
         .sheet(isPresented: $model.showCalcHistory) {
-            CalculationHistoryView(calculationStrings: [model.calcHistory])
+            CalculationHistoryView(calculationStrings: model.calcHistory.reversed())
                 .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $model.showDatePicker) {

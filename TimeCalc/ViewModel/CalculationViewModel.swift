@@ -14,7 +14,7 @@ import SwiftUI
     var sliderUnit: CircularSliderUnit = .minutes
     
     var timeDate: Date = .now
-    var calcHistory: String = String(format: "%.0f", floor(Date().timeIntervalSince1970))
+    var calcHistory: [String] = [String(format: "%.0f", floor(Date().timeIntervalSince1970))]
     
     var showDatePicker: Bool = false
     var showCalcHistory: Bool = false
@@ -28,7 +28,8 @@ import SwiftUI
     }
     
     func clearHistory() {
-        calcHistory = String(format: "%.0f", floor(timeDate.timeIntervalSince1970))
+        calcHistory = calcHistory.filter { $0.contains(".") }
+        calcHistory.append(String(format: "%.0f", floor(timeDate.timeIntervalSince1970)))
     }
 }
 
