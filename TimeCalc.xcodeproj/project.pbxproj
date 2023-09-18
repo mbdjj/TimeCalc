@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3459F7AF2AB8729C00D15011 /* CalcHistoryOperationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3459F7AE2AB8729C00D15011 /* CalcHistoryOperationCell.swift */; };
 		345DE4562AB830CA00228BCB /* CalcHistoryMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DE4552AB830CA00228BCB /* CalcHistoryMainCell.swift */; };
 		3472FB462A911C2C00B435CB /* TimeCalcApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3472FB452A911C2C00B435CB /* TimeCalcApp.swift */; };
 		3472FB482A911C2C00B435CB /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3472FB472A911C2C00B435CB /* CalculationView.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3459F7AE2AB8729C00D15011 /* CalcHistoryOperationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcHistoryOperationCell.swift; sourceTree = "<group>"; };
 		345DE4552AB830CA00228BCB /* CalcHistoryMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcHistoryMainCell.swift; sourceTree = "<group>"; };
 		3472FB422A911C2C00B435CB /* TimeCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3472FB452A911C2C00B435CB /* TimeCalcApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCalcApp.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				3472FB532A911C6000B435CB /* CircularSlider.swift */,
 				34F492CE2A98959B00A8E203 /* SliderUnitButtons.swift */,
 				345DE4552AB830CA00228BCB /* CalcHistoryMainCell.swift */,
+				3459F7AE2AB8729C00D15011 /* CalcHistoryOperationCell.swift */,
 			);
 			path = "Custom Components";
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				3472FB482A911C2C00B435CB /* CalculationView.swift in Sources */,
 				3472FB462A911C2C00B435CB /* TimeCalcApp.swift in Sources */,
 				3472FB542A911C6000B435CB /* CircularSlider.swift in Sources */,
+				3459F7AF2AB8729C00D15011 /* CalcHistoryOperationCell.swift in Sources */,
 				345DE4562AB830CA00228BCB /* CalcHistoryMainCell.swift in Sources */,
 				34F492CF2A98959B00A8E203 /* SliderUnitButtons.swift in Sources */,
 			);

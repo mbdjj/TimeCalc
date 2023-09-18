@@ -13,17 +13,21 @@ struct CalcHistoryMainCell: View {
     
     var body: some View {
         HStack {
-            Spacer()
-            VStack {
-                Text(item.startDate.formatted(date: .abbreviated, time: .omitted))
+            VStack(alignment: .leading) {
+                if !item.sameDay {
+                    Text(item.startDate.formatted(date: .abbreviated, time: .omitted))
+                }
                 Text(item.startDate.formatted(date: .omitted, time: item.usedSeconds ? .standard : .shortened))
             }
+            Spacer()
             Image(systemName: "arrow.right")
-            VStack {
-                Text(item.endDate.formatted(date: .abbreviated, time: .omitted))
+            Spacer()
+            VStack(alignment: .trailing) {
+                if !item.sameDay {
+                    Text(item.endDate.formatted(date: .abbreviated, time: .omitted))
+                }
                 Text(item.endDate.formatted(date: .omitted, time: item.usedSeconds ? .standard : .shortened))
             }
-            Spacer()
         }
         .bold()
     }

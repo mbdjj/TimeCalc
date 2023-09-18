@@ -27,11 +27,10 @@ struct CalcHistoryItem: Identifiable {
         }
         
         var date = startDate
-        operations = []
-        for operationString in operationStrings {
-            let operation = CalcHistoryOperation(decodeString: operationString, startDate: date)
-            operations.append(operation)
+        operations = operationStrings.map {
+            let operation = CalcHistoryOperation(decodeString: $0, startDate: date)
             date = operation.endDate
+            return operation
         }
     }
     
@@ -41,9 +40,12 @@ struct CalcHistoryItem: Identifiable {
     var endDate: Date { operations.last?.endDate ?? startDate }
     
     private let operationStrings: [String]
-    var operations: [CalcHistoryOperation]
+    let operations: [CalcHistoryOperation]
     
     let usedSeconds: Bool
+    var sameDay: Bool {
+        Calendar.current.startOfDay(for: startDate) == Calendar.current.startOfDay(for: endDate)
+    }
     
     var id: String { return decodeString }
     
@@ -81,6 +83,10 @@ struct CalcHistoryOperation: Identifiable {
     var value: Double {
         let multiplier: Double = mathSymbol == "+" ? 1 : -1
         return amount * multiplier
+    }
+    
+    var sameDay: Bool {
+        Calendar.current.startOfDay(for: startDate) == Calendar.current.startOfDay(for: endDate)
     }
     
     let id = UUID()
