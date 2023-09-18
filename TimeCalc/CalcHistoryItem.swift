@@ -49,8 +49,7 @@ struct CalcHistoryItem: Identifiable {
     
 }
 
-struct CalcHistoryOperation {
-    //+m9
+struct CalcHistoryOperation: Identifiable {
     
     init(decodeString: String, startDate: Date) {
         self.decodeString = decodeString
@@ -84,5 +83,5 @@ struct CalcHistoryOperation {
         return amount * multiplier
     }
     
-    
+    let id = UUID()
 }

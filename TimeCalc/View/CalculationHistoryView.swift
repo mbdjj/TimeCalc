@@ -9,36 +9,45 @@ import SwiftUI
 
 struct CalculationHistoryView: View {
     
-    let calculationString: String
-    let calcItem: CalcHistoryItem
+    let calculationStrings: [String]
+    let calcItems: [CalcHistoryItem]
     
-    init(calculationString: String) {
-        self.calculationString = calculationString
-        self.calcItem = CalcHistoryItem(decodeString: calculationString)
+    @State var showOperations: [(String, Bool)]
+    
+    init(calculationStrings: [String]) {
+        self.calculationStrings = calculationStrings
+        self.calcItems = calculationStrings
+            .map { CalcHistoryItem(decodeString: $0) }
+        
+        _showOperations = State(initialValue: calcItems.map { ($0.id, false) })
     }
     
     var body: some View {
         NavigationStack {
-            List {
-                HStack {
-                    Spacer()
-                    VStack {
-                        Text(calcItem.startDate.formatted(date: .abbreviated, time: .omitted))
-                        Text(calcItem.startDate.formatted(date: .omitted, time: calcItem.usedSeconds ? .standard : .shortened))
+            List(calcItems) { item in
+                Section {
+                    let index = showOperations.firstIndex { $0.0 == item.id } ?? 0
+                    
+                    Button {
+                        withAnimation {
+                            showOperations[index].1.toggle()
+                        }
+                    } label: {
+                        CalcHistoryMainCell(item: item)
                     }
-                    Image(systemName: "arrow.right")
-                    VStack {
-                        Text(calcItem.endDate.formatted(date: .abbreviated, time: .omitted))
-                        Text(calcItem.endDate.formatted(date: .omitted, time: calcItem.usedSeconds ? .standard : .shortened))
+                    .foregroundStyle(.primary)
+                        
+                    if showOperations[index].1 {
+                        ForEach(item.operations) { operation in
+                            Text("\(operation.mathSymbol) \(Int(operation.amount)) \(operation.unit.name)")
+                        }
                     }
-                    Spacer()
                 }
-                .bold()
             }
         }
     }
 }
 
 #Preview {
-    CalculationHistoryView(calculationString: "1694775798.+m9.+s49.+h112")
+    CalculationHistoryView(calculationStrings: ["1694775798.+m9.+s49.+h112"])
 }

@@ -112,7 +112,7 @@ struct CalculationView: View {
                 .padding(.bottom, 50)
         }
         .sheet(isPresented: $model.showCalcHistory) {
-            CalculationHistoryView(calculationString: model.calcHistory)
+            CalculationHistoryView(calculationStrings: [model.calcHistory])
                 .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $model.showDatePicker) {
