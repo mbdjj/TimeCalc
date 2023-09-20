@@ -9,17 +9,16 @@ import SwiftUI
 
 struct CalculationHistoryView: View {
     
-    let calculationStrings: [String]
-    let calcItems: [CalcHistoryItem]
+    @Binding var calculationStrings: [String]
+    var calcItems: [CalcHistoryItem] {
+        calculationStrings.map { CalcHistoryItem(decodeString: $0) }.reversed()
+    }
     
     @State var showOperations: [Bool]
     
-    init(calculationStrings: [String]) {
-        self.calculationStrings = calculationStrings
-        self.calcItems = calculationStrings
-            .map { CalcHistoryItem(decodeString: $0) }
-        
-        _showOperations = State(initialValue: calcItems.map { _ in false })
+    init(calculationStrings: Binding<[String]>) {
+        _calculationStrings = calculationStrings
+        _showOperations = State(initialValue: calculationStrings.map { _ in false })
     }
     
     var body: some View {
@@ -44,16 +43,21 @@ struct CalculationHistoryView: View {
                     }
                     .swipeActions(edge: .trailing) {
                         Button {
-                            //calcItems.remove(at: i)
+                            if i != 0 {
+                                let removeIndex = calculationStrings.count - i - 1
+                                calculationStrings.remove(at: removeIndex)
+                                showOperations.remove(at: i)
+                            }
                         } label: {
                             Image(systemName: "trash")
                                 .symbolVariant(.fill)
                         }
-                        .tint(.red)
+                        .tint(i != 0 ? .red : .gray)
                     }
 
                 }
             }
+            .navigationTitle("History")
         }
         .onAppear {
             showOperations[0] = true
@@ -62,5 +66,5 @@ struct CalculationHistoryView: View {
 }
 
 #Preview {
-    CalculationHistoryView(calculationStrings: ["1694775798.+m9.+s49.+h112"])
+    CalculationHistoryView(calculationStrings: .constant(["1694775798.+m9.+s49.+h112"]))
 }
