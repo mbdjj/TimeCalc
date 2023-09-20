@@ -33,9 +33,30 @@ struct CalculationHistoryView: View {
                     } label: {
                         CalcHistoryMainCell(item: item)
                     }
+                    .swipeActions(edge: .leading) {
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "bookmark")
+                                .symbolVariant(.fill)
+                        }
+                        .tint(.yellow)
+                    }
+                    .swipeActions(edge: .trailing) {
+                        Button {
+                            //calcItems.remove(at: i)
+                        } label: {
+                            Image(systemName: "trash")
+                                .symbolVariant(.fill)
+                        }
+                        .tint(.red)
+                    }
 
                 }
             }
+        }
+        .onAppear {
+            showOperations[0] = true
         }
     }
 }
