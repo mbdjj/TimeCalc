@@ -16,6 +16,8 @@ struct CalculationHistoryView: View {
     
     @State var showOperations: [Bool]
     
+    @AppStorage("calcStrings") var savedCalcStrings: String = ""
+    
     init(calculationStrings: Binding<[String]>) {
         _calculationStrings = calculationStrings
         _showOperations = State(initialValue: calculationStrings.map { _ in false })
@@ -33,10 +35,19 @@ struct CalculationHistoryView: View {
                         CalcHistoryMainCell(item: item)
                     }
                     .swipeActions(edge: .leading) {
+                        let isSaved = savedCalcStrings.contains(item.id)
                         Button {
-                            
+                            if isSaved {
+                                savedCalcStrings = savedCalcStrings
+                                    .replacingOccurrences(of: item.id, with: "")
+                                    .replacingOccurrences(of: ",,", with: ",")
+                                    .removeFirstComma()
+                                print(savedCalcStrings)
+                            } else {
+                                savedCalcStrings += "\(savedCalcStrings == "" ? "" : ",")\(item.id)"
+                            }
                         } label: {
-                            Image(systemName: "bookmark")
+                            Image(systemName: isSaved ? "bookmark.slash" : "bookmark")
                                 .symbolVariant(.fill)
                         }
                         .tint(.yellow)
@@ -67,4 +78,14 @@ struct CalculationHistoryView: View {
 
 #Preview {
     CalculationHistoryView(calculationStrings: .constant(["1694775798.+m9.+s49.+h112"]))
+}
+
+extension String {
+    func removeFirstComma() -> String {
+        var text = self
+        if text.first == "," {
+            text.remove(at: self.startIndex)
+        }
+        return text
+    }
 }
