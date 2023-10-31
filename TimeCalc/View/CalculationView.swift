@@ -13,32 +13,6 @@ struct CalculationView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Spacer()
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "bell")
-                        .symbolVariant(.fill)
-                }
-                .padding(.top)
-                .buttonStyle(.bordered)
-                .buttonBorderShape(.circle)
-                
-                Button {
-                    withAnimation {
-                        model.timeDate = .now
-                        model.clearHistory()
-                    }
-                } label: {
-                    Text("Now")
-                }
-                .padding(.trailing)
-                .padding(.top)
-                .buttonStyle(.bordered)
-                .buttonBorderShape(.capsule)
-            }
             Picker("", selection: $model.calculationMode) {
                 Text("Date").tag(0)
                 Text("Time").tag(1)
@@ -54,7 +28,7 @@ struct CalculationView: View {
                         .opacity(0)
                 }
                 
-                Text(model.timeDate.formatted(date: model.calculationMode == 1 ? .omitted : .abbreviated, time: model.sliderUnit == .seconds ? .standard : .shortened))
+                Text(model.timeDate.formatted(date: model.calculationMode == 1 ? .omitted : .abbreviated, time: model.calculationMode == 1 ? model.sliderUnit == .seconds ? .standard : .shortened : .omitted))
                     .font(.system(.largeTitle, design: .rounded, weight: .bold))
                     .contentTransition(.numericText())
                     .padding(.top)
@@ -110,6 +84,28 @@ struct CalculationView: View {
                 }
             }
                 .padding(.bottom, 50)
+        }
+        .navigationTitle("Time dial")
+        .toolbar {
+            Button {
+                
+            } label: {
+                Image(systemName: "bell")
+                    .symbolVariant(.fill)
+            }
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.circle)
+            
+            Button {
+                withAnimation {
+                    model.timeDate = .now
+                    model.clearHistory()
+                }
+            } label: {
+                Text("Now")
+            }
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.capsule)
         }
         .sheet(isPresented: $model.showCalcHistory) {
             CalculationHistoryView(calculationStrings: $model.calcHistory)
