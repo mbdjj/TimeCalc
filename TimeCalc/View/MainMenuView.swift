@@ -25,9 +25,9 @@ struct MainMenuView: View {
             .navigationDestination(for: AppDestination.self) { destination in
                 switch destination {
                 case .dateAddingView:
-                    CalculationView()
+                    TimeDialView()
                 case .dateDifferenceView:
-                    EmptyView()
+                    DateDifferenceView()
                 }
             }
         }

@@ -1,5 +1,5 @@
 //
-//  CalculationView.swift
+//  TimeDialView.swift
 //  TimeCalc
 //
 //  Created by Marcin Bartminski on 19/08/2023.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct CalculationView: View {
+struct TimeDialView: View {
     
-    @State private var model = CalculationViewModel()
+    @State private var model = TimeDialViewModel()
     
     var body: some View {
         VStack {
@@ -129,5 +129,5 @@ struct CalculationView: View {
 }
 
 #Preview {
-    CalculationView()
+    TimeDialView()
 }
