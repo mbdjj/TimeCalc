@@ -12,7 +12,7 @@ struct DateDifferenceView: View {
     @State private var model = DateDifferenceViewModel()
     
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 32) {
             Picker("", selection: .constant(0)) {
                 Text("Date").tag(0)
                 Text("Time").tag(1)
@@ -20,26 +20,29 @@ struct DateDifferenceView: View {
             .pickerStyle(.segmented)
             .padding(.horizontal)
             
-            Text(model.topDate.formatted(date: .abbreviated, time: .omitted))
-                .font(.system(.largeTitle, design: .rounded, weight: .bold))
+            HStack {
+                DatePicker("", selection: $model.topDate, displayedComponents: .date)
+                    .labelsHidden()
+                
+                Image(systemName: "arrow.right")
+                    .font(.system(.title2, design: .rounded, weight: .bold))
+                
+                DatePicker("", selection: $model.bottomDate, displayedComponents: .date)
+                    .labelsHidden()
+            }
             
-            Image(systemName: "arrow.down")
-                .font(.system(.largeTitle, design: .rounded, weight: .bold))
-            
-            Text(model.bottomDate.formatted(date: .abbreviated, time: .omitted))
-                .font(.system(.largeTitle, design: .rounded, weight: .bold))
-            
-            Image(systemName: "equal")
-                .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                .rotationEffect(.degrees(90))
+            Spacer()
             
             VStack {
                 ForEach(DateDiffItem(fromDate: model.topDate, toDate: model.bottomDate).difference) {
-                    Text("\($0.value) \($0.componentName)")
-                        .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                    if $0.value != 0 {
+                        Text("\($0.value) \($0.componentName)")
+                            .font(.system(.title, design: .rounded, weight: .bold))
+                    }
                 }
             }
             
+            Spacer()
             Spacer()
         }
         .navigationTitle("Date difference")

@@ -17,6 +17,7 @@
 		3472FB4A2A911C2F00B435CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3472FB492A911C2F00B435CB /* Assets.xcassets */; };
 		3472FB4D2A911C2F00B435CB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3472FB4C2A911C2F00B435CB /* Preview Assets.xcassets */; };
 		3472FB542A911C6000B435CB /* CircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3472FB532A911C6000B435CB /* CircularSlider.swift */; };
+		34811AF62AF3869F00EA0CA4 /* UnitChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34811AF52AF3869F00EA0CA4 /* UnitChangeView.swift */; };
 		349BEF7D2AB5F93000B2428E /* CalculationHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349BEF7C2AB5F93000B2428E /* CalculationHistoryView.swift */; };
 		349BEF7F2AB5FAB200B2428E /* CalcHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349BEF7E2AB5FAB200B2428E /* CalcHistoryItem.swift */; };
 		349E9A8F2AF13F7400E20AFB /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349E9A8E2AF13F7400E20AFB /* MainMenuView.swift */; };
@@ -36,6 +37,7 @@
 		3472FB492A911C2F00B435CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3472FB4C2A911C2F00B435CB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3472FB532A911C6000B435CB /* CircularSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
+		34811AF52AF3869F00EA0CA4 /* UnitChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitChangeView.swift; sourceTree = "<group>"; };
 		349BEF7C2AB5F93000B2428E /* CalculationHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryView.swift; sourceTree = "<group>"; };
 		349BEF7E2AB5FAB200B2428E /* CalcHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcHistoryItem.swift; sourceTree = "<group>"; };
 		349E9A8E2AF13F7400E20AFB /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				3472FB472A911C2C00B435CB /* TimeDialView.swift */,
 				349BEF7C2AB5F93000B2428E /* CalculationHistoryView.swift */,
 				3436F1672AF227B000A3507E /* DateDifferenceView.swift */,
+				34811AF52AF3869F00EA0CA4 /* UnitChangeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				349BEF7D2AB5F93000B2428E /* CalculationHistoryView.swift in Sources */,
 				349BEF7F2AB5FAB200B2428E /* CalcHistoryItem.swift in Sources */,
 				3472FB482A911C2C00B435CB /* TimeDialView.swift in Sources */,
+				34811AF62AF3869F00EA0CA4 /* UnitChangeView.swift in Sources */,
 				3472FB462A911C2C00B435CB /* TimeCalcApp.swift in Sources */,
 				3472FB542A911C6000B435CB /* CircularSlider.swift in Sources */,
 				3459F7AF2AB8729C00D15011 /* CalcHistoryOperationCell.swift in Sources */,

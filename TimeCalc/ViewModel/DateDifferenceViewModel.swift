@@ -9,7 +9,7 @@ import SwiftUI
 
 @Observable class DateDifferenceViewModel {
     var topDate: Date = .now
-    var bottomDate: Date = .distantFuture
+    var bottomDate: Date = .now
     
     var showDatePicker: Bool = false
     var datePickerIndex: Int = 0

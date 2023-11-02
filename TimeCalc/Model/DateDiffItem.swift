@@ -13,6 +13,8 @@ struct DateDiffItem: Identifiable {
         self.fromDate = fromDate
         self.toDate = toDate
         
+        self.interval = toDate.timeIntervalSince(fromDate)
+        
         let interval = fromDate.startOfDay().dateDifferenceComponents(to: toDate.startOfDay())
         self.difference = [
             DateDifference(componentName: "years", value: interval.year),
@@ -23,6 +25,8 @@ struct DateDiffItem: Identifiable {
     
     let fromDate: Date
     let toDate: Date
+    
+    let interval: Double
     
     let difference: [DateDifference]
     
