@@ -17,8 +17,8 @@ struct MainMenuView: View {
                 Section {
                     NavigationLink("Time dial", value: AppDestination.dateAddingView)
                     NavigationLink("Date difference", value: AppDestination.dateDifferenceView)
-                    NavigationLink("Change units", value: AppDestination.unitChangeView)
-                        .disabled(true)
+//                    NavigationLink("Change units", value: AppDestination.unitChangeView)
+//                        .disabled(true)
                 } header: {
                     Text("Modes")
                 }

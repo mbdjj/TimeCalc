@@ -31,6 +31,21 @@ struct DateDifferenceView: View {
                     .labelsHidden()
             }
             
+            Menu {
+                Button {
+                    model.topDate = .now
+                } label: {
+                    Label("Left", systemImage: "left.circle")
+                }
+                Button {
+                    model.bottomDate = .now
+                } label: {
+                    Label("Right", systemImage: "right.circle")
+                }
+            } label: {
+                Text("Reset")
+            }
+            
             Spacer()
             
             VStack {
@@ -46,6 +61,16 @@ struct DateDifferenceView: View {
             Spacer()
         }
         .navigationTitle("Date difference")
+        .onChange(of: model.topDate) {
+            if model.topDate > model.bottomDate {
+                (model.topDate, model.bottomDate) = (model.bottomDate, model.topDate)
+            }
+        }
+        .onChange(of: model.bottomDate) {
+            if model.topDate > model.bottomDate {
+                (model.topDate, model.bottomDate) = (model.bottomDate, model.topDate)
+            }
+        }
     }
 }
 
