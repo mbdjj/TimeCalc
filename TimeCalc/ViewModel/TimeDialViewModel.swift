@@ -12,6 +12,7 @@ import SwiftUI
     var calculationMode = 1
     var progress: CGFloat = 0
     var sliderUnit: CircularSliderUnit = .minutes
+    var increase: Bool = true
     
     var timeDate: Date = .now
     var calcHistory: [String] = [String(format: "%.0f", floor(Date().timeIntervalSince1970))]

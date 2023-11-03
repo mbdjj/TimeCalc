@@ -14,6 +14,8 @@ struct CircularSlider: View {
     @Binding var unit: CircularSliderUnit
     @State private var angle: Double = 0
     
+    @Binding var increase: Bool
+    
     @State private var rotations: Int = 0
     @State private var previousAngle: Double = 0
     
@@ -86,6 +88,7 @@ struct CircularSlider: View {
                             withAnimation(.linear(duration: 0.15)) {
                                 angle = Double(angle) + Double(rotations * 360)
                                 let progress = angle / 360
+                                self.increase = progress > self.progress
                                 self.progress = progress
                                 self.angle = angle
                             }
@@ -164,7 +167,7 @@ extension Double {
 }
 
 #Preview {
-    CircularSlider(progress: .constant(0), unit: .constant(.hours)) {
+    CircularSlider(progress: .constant(0), unit: .constant(.hours), increase: .constant(true)) {
         
     }
 }

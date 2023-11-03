@@ -57,7 +57,7 @@ struct TimeDialView: View {
                     .font(.title)
                     .bold()
                     .padding(.bottom)
-                    .contentTransition(.numericText())
+                    .contentTransition(.numericText(countsDown: !model.increase))
                     .sensoryFeedback(.increase, trigger: sliderValue)
             }
             .opacity(sliderValue == 0 ? 0.0 : 1.0)
@@ -74,7 +74,7 @@ struct TimeDialView: View {
             SliderUnitButtons(sliderUnit: $model.sliderUnit, unitOptions: model.unitOptions)
                 .minimumScaleFactor(0.6)
             
-            CircularSlider(progress: $model.progress, unit: $model.sliderUnit) {
+            CircularSlider(progress: $model.progress, unit: $model.sliderUnit, increase: $model.increase) {
                 withAnimation {
                     model.addToDate(sliderValue * nonAbs, unit: model.sliderUnit.component)
                     
