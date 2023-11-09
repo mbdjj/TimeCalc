@@ -8,6 +8,8 @@
 import SwiftUI
 
 @Observable class DateDifferenceViewModel {
+    var dateMode: Int = 0
+    
     var topDate: Date = .now
     var bottomDate: Date = .now
     

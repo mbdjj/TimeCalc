@@ -9,18 +9,27 @@ import SwiftUI
 
 struct DateDiffItem: Identifiable {
     
-    init(fromDate: Date, toDate: Date) {
+    init(fromDate: Date, toDate: Date, dateMode: Bool) {
         self.fromDate = fromDate
         self.toDate = toDate
         
         self.interval = toDate.timeIntervalSince(fromDate)
         
-        let interval = fromDate.startOfDay().dateDifferenceComponents(to: toDate.startOfDay())
-        self.difference = [
-            DateDifference(componentName: "years", value: interval.year),
-            DateDifference(componentName: "months", value: interval.month),
-            DateDifference(componentName: "days", value: interval.day)
-        ]
+        if dateMode {
+            let dateInterval = fromDate.startOfDay().dateDifferenceComponents(to: toDate.startOfDay())
+            self.difference = [
+                DateDifference(componentName: "years", value: dateInterval.year),
+                DateDifference(componentName: "months", value: dateInterval.month),
+                DateDifference(componentName: "days", value: dateInterval.day)
+            ]
+        } else {
+            let timeInterval = fromDate.getRidOfSeconds().timeDifferenceComponents(to: toDate.getRidOfSeconds())
+            self.difference = [
+                DateDifference(componentName: "hours", value: timeInterval.hour),
+                DateDifference(componentName: "minutes", value: timeInterval.minute),
+                DateDifference(componentName: "seconds", value: timeInterval.second)
+            ]
+        }
     }
     
     let fromDate: Date
@@ -44,6 +53,16 @@ extension Date {
     func dateDifferenceComponents(to date: Date) -> (year: Int, month: Int, day: Int) {
         let components = Calendar.current.dateComponents([.year, .month, .day], from: self, to: date)
         return (year: components.year ?? 0, month: components.month ?? 0, day: components.day ?? 0)
+    }
+    
+    func timeDifferenceComponents(to time: Date) -> (hour: Int, minute: Int, second: Int) {
+        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: self, to: time)
+        return (hour: components.hour ?? 0, minute: components.minute ?? 0, second: components.second ?? 0)
+    }
+    
+    func getRidOfSeconds() -> Date {
+        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: self)
+        return Calendar.current.date(from: components) ?? self
     }
     
     func startOfDay() -> Date {

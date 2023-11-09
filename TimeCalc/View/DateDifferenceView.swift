@@ -13,7 +13,7 @@ struct DateDifferenceView: View {
     
     var body: some View {
         VStack(spacing: 32) {
-            Picker("", selection: .constant(0)) {
+            Picker("", selection: $model.dateMode) {
                 Text("Date").tag(0)
                 Text("Time").tag(1)
             }
@@ -21,13 +21,13 @@ struct DateDifferenceView: View {
             .padding(.horizontal)
             
             HStack {
-                DatePicker("", selection: $model.topDate, displayedComponents: .date)
+                DatePicker("", selection: $model.topDate, displayedComponents: model.dateMode == 0 ? .date : .hourAndMinute)
                     .labelsHidden()
                 
                 Image(systemName: "arrow.right")
                     .font(.system(.title2, design: .rounded, weight: .bold))
                 
-                DatePicker("", selection: $model.bottomDate, displayedComponents: .date)
+                DatePicker("", selection: $model.bottomDate, displayedComponents: model.dateMode == 0 ? .date : .hourAndMinute)
                     .labelsHidden()
             }
             
@@ -49,7 +49,7 @@ struct DateDifferenceView: View {
             Spacer()
             
             VStack {
-                ForEach(DateDiffItem(fromDate: model.topDate, toDate: model.bottomDate).difference) {
+                ForEach(DateDiffItem(fromDate: model.topDate, toDate: model.bottomDate, dateMode: model.dateMode == 0).difference) {
                     if $0.value != 0 {
                         Text("\($0.value) \($0.componentName)")
                             .font(.system(.title, design: .rounded, weight: .bold))
