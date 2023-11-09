@@ -38,6 +38,7 @@
 		3472FB4C2A911C2F00B435CB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3472FB532A911C6000B435CB /* CircularSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
 		34811AF52AF3869F00EA0CA4 /* UnitChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitChangeView.swift; sourceTree = "<group>"; };
+		3485CAE92AFCC77E00B319C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		349BEF7C2AB5F93000B2428E /* CalculationHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryView.swift; sourceTree = "<group>"; };
 		349BEF7E2AB5FAB200B2428E /* CalcHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcHistoryItem.swift; sourceTree = "<group>"; };
 		349E9A8E2AF13F7400E20AFB /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		3472FB442A911C2C00B435CB /* TimeCalc */ = {
 			isa = PBXGroup;
 			children = (
+				3485CAE92AFCC77E00B319C6 /* Info.plist */,
 				3472FB452A911C2C00B435CB /* TimeCalcApp.swift */,
 				349E9A902AF1438800E20AFB /* Model */,
 				34E411A82A91CD1600F95F19 /* View */,
@@ -355,6 +357,7 @@
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TimeCalc/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Timefly;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -386,6 +389,7 @@
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TimeCalc/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Timefly;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
