@@ -28,9 +28,9 @@ struct CircularSlider: View {
             
             ZStack {
                 ForEach(0 ..< unit.intValue, id: \.self) { index in
-                    Rectangle()
+                    RoundedRectangle(cornerRadius: 2)
                         .fill(Color.primary)
-                        .frame(width: 2, height: 15)
+                        .frame(width: [CircularSliderUnit.minutes, .seconds].contains(unit) ? 2 : 4, height: 15)
                         .offset(y: -size / 2 + 35)
                         .rotationEffect(Angle(degrees: Double(index) * Double(360 / unit.intValue)))
                 }
