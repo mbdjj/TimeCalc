@@ -45,6 +45,8 @@ struct DateDifferenceView: View {
             } label: {
                 Text("Reset")
             }
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.capsule)
             
             Spacer()
             

@@ -70,6 +70,9 @@ struct TimeDialView: View {
             } label: {
                 Text("Calculation history")
             }
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.capsule)
+            .padding(.bottom, 8)
             
             SliderUnitButtons(sliderUnit: $model.sliderUnit, unitOptions: model.unitOptions)
                 .minimumScaleFactor(0.6)
