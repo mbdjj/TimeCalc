@@ -15,10 +15,12 @@ struct MainMenuView: View {
         NavigationStack(path: $path) {
             List {
                 Section {
-                    NavigationLink("Time dial", value: AppDestination.dateAddingView)
-                    NavigationLink("Date difference", value: AppDestination.dateDifferenceView)
-//                    NavigationLink("Change units", value: AppDestination.unitChangeView)
-//                        .disabled(true)
+                    NavigationLink(value: AppDestination.timeDialView) {
+                        Label("Time dial", systemImage: "dial.medium")
+                    }
+                    NavigationLink(value: AppDestination.dateDifferenceView) {
+                        Label("Date difference", systemImage: "plus.forwardslash.minus")
+                    }
                 } header: {
                     Text("Modes")
                 }
@@ -26,12 +28,10 @@ struct MainMenuView: View {
             .navigationTitle("Timefly")
             .navigationDestination(for: AppDestination.self) { destination in
                 switch destination {
-                case .dateAddingView:
+                case .timeDialView:
                     TimeDialView()
                 case .dateDifferenceView:
                     DateDifferenceView()
-                case .unitChangeView:
-                    UnitChangeView()
                 }
             }
         }
@@ -39,9 +39,8 @@ struct MainMenuView: View {
 }
 
 enum AppDestination {
-    case dateAddingView
+    case timeDialView
     case dateDifferenceView
-    case unitChangeView
 }
 
 #Preview {
