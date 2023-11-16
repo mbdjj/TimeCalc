@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		34368D212B068DAB005E434F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34368D202B068DAB005E434F /* NotificationManager.swift */; };
+		34368D232B069CCE005E434F /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34368D222B069CCE005E434F /* NotificationView.swift */; };
 		3436F1682AF227B000A3507E /* DateDifferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3436F1672AF227B000A3507E /* DateDifferenceView.swift */; };
 		3436F16A2AF22B3B00A3507E /* DateDifferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3436F1692AF22B3B00A3507E /* DateDifferenceViewModel.swift */; };
 		3436F16C2AF22CAF00A3507E /* DateDiffItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3436F16B2AF22CAF00A3507E /* DateDiffItem.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		34368D202B068DAB005E434F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		34368D222B069CCE005E434F /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		3436F1672AF227B000A3507E /* DateDifferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDifferenceView.swift; sourceTree = "<group>"; };
 		3436F1692AF22B3B00A3507E /* DateDifferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDifferenceViewModel.swift; sourceTree = "<group>"; };
 		3436F16B2AF22CAF00A3507E /* DateDiffItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDiffItem.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				349BEF7C2AB5F93000B2428E /* CalculationHistoryView.swift */,
 				3436F1672AF227B000A3507E /* DateDifferenceView.swift */,
 				34811AF52AF3869F00EA0CA4 /* UnitChangeView.swift */,
+				34368D222B069CCE005E434F /* NotificationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				349E9A8F2AF13F7400E20AFB /* MainMenuView.swift in Sources */,
 				34E411A72A91CD1000F95F19 /* TimeDialViewModel.swift in Sources */,
 				3436F16C2AF22CAF00A3507E /* DateDiffItem.swift in Sources */,
+				34368D232B069CCE005E434F /* NotificationView.swift in Sources */,
 				349BEF7D2AB5F93000B2428E /* CalculationHistoryView.swift in Sources */,
 				349BEF7F2AB5FAB200B2428E /* CalcHistoryItem.swift in Sources */,
 				3472FB482A911C2C00B435CB /* TimeDialView.swift in Sources */,

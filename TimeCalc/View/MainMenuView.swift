@@ -24,6 +24,14 @@ struct MainMenuView: View {
                 } header: {
                     Text("Modes")
                 }
+                
+                Section {
+                    NavigationLink(value: AppDestination.manageNotifications) {
+                        Label("Manage notifications", systemImage: "bell.fill")
+                    }
+                } header: {
+                    Text("Extras")
+                }
             }
             .navigationTitle("Timefly")
             .navigationDestination(for: AppDestination.self) { destination in
@@ -32,6 +40,8 @@ struct MainMenuView: View {
                     TimeDialView()
                 case .dateDifferenceView:
                     DateDifferenceView()
+                case .manageNotifications:
+                    NotificationView()
                 }
             }
         }
@@ -42,8 +52,12 @@ struct MainMenuView: View {
 }
 
 enum AppDestination {
+    // Modes
     case timeDialView
     case dateDifferenceView
+    
+    // Extras
+    case manageNotifications
 }
 
 #Preview {

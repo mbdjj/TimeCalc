@@ -36,4 +36,21 @@ struct NotificationManager {
     static func clearBadges() {
         UNUserNotificationCenter.current().setBadgeCount(0)
     }
+    
+    static func getAllScheduledNotifications() async -> [UNNotificationRequest] {
+        await withCheckedContinuation { continuation in
+            UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
+                print("There are \(notifications.count) scheduled notifications")
+                continuation.resume(returning: notifications)
+            }
+        }
+    }
+    
+    static func removeNotification(with id: String) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
+    }
+}
+
+extension UNNotificationRequest: Identifiable {
+    public var id: String { identifier }
 }
