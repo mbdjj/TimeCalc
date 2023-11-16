@@ -24,6 +24,8 @@ import SwiftUI
         calculationMode == 1 ? [CircularSliderUnit].timeOnly : [CircularSliderUnit].dateOnly
     }
     
+    var notificationAvailable: Bool { timeDate < .now }
+    
     @MainActor func addToDate(_ value: Double, unit: Calendar.Component) {
         timeDate = Calendar.current.date(byAdding: unit, value: Int(value), to: timeDate) ?? .now
     }

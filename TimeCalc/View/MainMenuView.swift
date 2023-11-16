@@ -35,6 +35,9 @@ struct MainMenuView: View {
                 }
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            NotificationManager.clearBadges()
+        }
     }
 }
 

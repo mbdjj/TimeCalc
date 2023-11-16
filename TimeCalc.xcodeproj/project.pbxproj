@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34368D212B068DAB005E434F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34368D202B068DAB005E434F /* NotificationManager.swift */; };
 		3436F1682AF227B000A3507E /* DateDifferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3436F1672AF227B000A3507E /* DateDifferenceView.swift */; };
 		3436F16A2AF22B3B00A3507E /* DateDifferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3436F1692AF22B3B00A3507E /* DateDifferenceViewModel.swift */; };
 		3436F16C2AF22CAF00A3507E /* DateDiffItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3436F16B2AF22CAF00A3507E /* DateDiffItem.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		34368D202B068DAB005E434F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		3436F1672AF227B000A3507E /* DateDifferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDifferenceView.swift; sourceTree = "<group>"; };
 		3436F1692AF22B3B00A3507E /* DateDifferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDifferenceViewModel.swift; sourceTree = "<group>"; };
 		3436F16B2AF22CAF00A3507E /* DateDiffItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDiffItem.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			children = (
 				3485CAE92AFCC77E00B319C6 /* Info.plist */,
 				3472FB452A911C2C00B435CB /* TimeCalcApp.swift */,
+				34368D202B068DAB005E434F /* NotificationManager.swift */,
 				349E9A902AF1438800E20AFB /* Model */,
 				34E411A82A91CD1600F95F19 /* View */,
 				34E411AA2A91CD3800F95F19 /* ViewModel */,
@@ -219,6 +222,7 @@
 				3459F7AF2AB8729C00D15011 /* CalcHistoryOperationCell.swift in Sources */,
 				345DE4562AB830CA00228BCB /* CalcHistoryMainCell.swift in Sources */,
 				3436F16A2AF22B3B00A3507E /* DateDifferenceViewModel.swift in Sources */,
+				34368D212B068DAB005E434F /* NotificationManager.swift in Sources */,
 				34F492CF2A98959B00A8E203 /* SliderUnitButtons.swift in Sources */,
 				3436F1682AF227B000A3507E /* DateDifferenceView.swift in Sources */,
 			);
@@ -352,7 +356,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"TimeCalc/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
@@ -384,7 +388,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"TimeCalc/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;

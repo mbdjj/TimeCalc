@@ -91,13 +91,23 @@ struct TimeDialView: View {
         .navigationTitle("Time dial")
         .toolbar {
             Button {
+                NotificationManager.requestAuth()
                 
+                let currentDecodeString = model.calcHistory.last ?? model.calcHistory[0]
+                let currentHistoryItem = CalcHistoryItem(decodeString: currentDecodeString)
+                
+                if currentHistoryItem.usedSeconds {
+                    NotificationManager.scheduleNotification(at: model.timeDate)
+                } else {
+                    NotificationManager.scheduleNotification(at: model.timeDate.getRidOfSeconds())
+                }
             } label: {
                 Image(systemName: "bell")
                     .symbolVariant(.fill)
             }
             .buttonStyle(.bordered)
             .buttonBorderShape(.circle)
+            .disabled(model.notificationAvailable)
             
             Button {
                 withAnimation {
@@ -127,6 +137,9 @@ struct TimeDialView: View {
                     }
             }
             .presentationDetents([.medium])
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            NotificationManager.clearBadges()
         }
     }
 }
