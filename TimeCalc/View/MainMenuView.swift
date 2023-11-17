@@ -27,7 +27,7 @@ struct MainMenuView: View {
                 
                 Section {
                     NavigationLink(value: AppDestination.manageNotifications) {
-                        Label("Manage notifications", systemImage: "bell.fill")
+                        Label("Manage notifications", systemImage: "app.badge")
                     }
                 } header: {
                     Text("Extras")
