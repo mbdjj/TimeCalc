@@ -35,12 +35,12 @@ struct DateDifferenceView: View {
                 Button {
                     model.topDate = .now
                 } label: {
-                    Label("Left", systemImage: "left.circle")
+                    Label("Start date", systemImage: "arrow.left.to.line")
                 }
                 Button {
                     model.bottomDate = .now
                 } label: {
-                    Label("Right", systemImage: "right.circle")
+                    Label("End date", systemImage: "arrow.right.to.line")
                 }
             } label: {
                 Text("Reset")

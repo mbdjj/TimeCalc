@@ -23,11 +23,14 @@ struct DateDiffItem: Identifiable {
                 DateDifference(componentName: "days", value: dateInterval.day)
             ]
         } else {
-            let timeInterval = fromDate.getRidOfSeconds().timeDifferenceComponents(to: toDate.getRidOfSeconds())
+            let dateInterval = fromDate.getRidOfSeconds().allDifferenceComponents(to: toDate.getRidOfSeconds())
             self.difference = [
-                DateDifference(componentName: "hours", value: timeInterval.hour),
-                DateDifference(componentName: "minutes", value: timeInterval.minute),
-                DateDifference(componentName: "seconds", value: timeInterval.second)
+                DateDifference(componentName: "years", value: dateInterval.year),
+                DateDifference(componentName: "months", value: dateInterval.month),
+                DateDifference(componentName: "days", value: dateInterval.day),
+                DateDifference(componentName: "hours", value: dateInterval.hour),
+                DateDifference(componentName: "minutes", value: dateInterval.minute),
+                DateDifference(componentName: "seconds", value: dateInterval.second)
             ]
         }
     }
@@ -58,6 +61,18 @@ extension Date {
     func timeDifferenceComponents(to time: Date) -> (hour: Int, minute: Int, second: Int) {
         let components = Calendar.current.dateComponents([.hour, .minute, .second], from: self, to: time)
         return (hour: components.hour ?? 0, minute: components.minute ?? 0, second: components.second ?? 0)
+    }
+    
+    func allDifferenceComponents(to date: Date) -> (year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
+        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self, to: date)
+        return (
+            year: components.year ?? 0,
+            month: components.month ?? 0,
+            day: components.day ?? 0,
+            hour: components.hour ?? 0,
+            minute: components.minute ?? 0,
+            second: components.second ?? 0
+        )
     }
     
     func getRidOfSeconds() -> Date {
