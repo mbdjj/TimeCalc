@@ -21,6 +21,9 @@ struct MainMenuView: View {
                     NavigationLink(value: AppDestination.dateDifferenceView) {
                         Label("Date difference", systemImage: "plus.forwardslash.minus")
                     }
+                    NavigationLink(value: AppDestination.timerView) {
+                        Label("Timer", systemImage: "timer")
+                    }
                 } header: {
                     Text("Modes")
                 }
@@ -40,6 +43,8 @@ struct MainMenuView: View {
                     TimeDialView()
                 case .dateDifferenceView:
                     DateDifferenceView()
+                case .timerView:
+                    TimerView()
                 case .manageNotifications:
                     NotificationView()
                 }
@@ -55,6 +60,7 @@ enum AppDestination {
     // Modes
     case timeDialView
     case dateDifferenceView
+    case timerView
     
     // Extras
     case manageNotifications

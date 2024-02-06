@@ -21,6 +21,8 @@ struct CircularSlider: View {
     
     @State private var gestureHappening: Bool = false
     
+    var allowGesture: Bool = true
+    
     let selectionFinished: () -> ()
     
     var body: some View {
@@ -63,34 +65,36 @@ struct CircularSlider: View {
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
-                            self.gestureHappening = true
-                            self.previousAngle = self.angle
-                            
-                            let vector = CGVector(dx: value.location.x, dy: value.location.y)
-                            let radians = atan2(vector.dy - 20, vector.dx - 20)
-                            var angle = radians * 180 / .pi
-                            
-                            if angle < 0 {
-                                angle = 360 + angle
-                            }
-                            
-                            let maxAngle = Double((rotations + 1) * 360)
-                            let minAngle = Double(rotations * 360)
-                            
-                            if previousAngle.inRange(maxAngle - 45 ... maxAngle) && Double(angle + CGFloat(rotations * 360)).inRange(minAngle ... minAngle + 45) {
-                                rotations += 1
-                            }
-                            
-                            if previousAngle.inRange(minAngle ... minAngle + 45) && Double(angle + CGFloat(rotations * 360)).inRange(maxAngle - 45 ... maxAngle) {
-                                rotations -= 1
-                            }
-                            
-                            withAnimation(.linear(duration: 0.15)) {
-                                angle = Double(angle) + Double(rotations * 360)
-                                let progress = angle / 360
-                                self.increase = abs(progress) > abs(self.progress)
-                                self.progress = progress
-                                self.angle = angle
+                            if allowGesture {
+                                self.gestureHappening = true
+                                self.previousAngle = self.angle
+                                
+                                let vector = CGVector(dx: value.location.x, dy: value.location.y)
+                                let radians = atan2(vector.dy - 20, vector.dx - 20)
+                                var angle = radians * 180 / .pi
+                                
+                                if angle < 0 {
+                                    angle = 360 + angle
+                                }
+                                
+                                let maxAngle = Double((rotations + 1) * 360)
+                                let minAngle = Double(rotations * 360)
+                                
+                                if previousAngle.inRange(maxAngle - 45 ... maxAngle) && Double(angle + CGFloat(rotations * 360)).inRange(minAngle ... minAngle + 45) {
+                                    rotations += 1
+                                }
+                                
+                                if previousAngle.inRange(minAngle ... minAngle + 45) && Double(angle + CGFloat(rotations * 360)).inRange(maxAngle - 45 ... maxAngle) {
+                                    rotations -= 1
+                                }
+                                
+                                withAnimation(.linear(duration: 0.15)) {
+                                    angle = Double(angle) + Double(rotations * 360)
+                                    let progress = angle / 360
+                                    self.increase = abs(progress) > abs(self.progress)
+                                    self.progress = progress
+                                    self.angle = angle
+                                }
                             }
                         }
                         .onEnded { _ in
@@ -108,12 +112,23 @@ struct CircularSlider: View {
                 )
                 .rotationEffect(.degrees(-90))
                 .sensoryFeedback(.start, trigger: gestureHappening)
+                .onChange(of: progress) { _, progress in
+                    if !allowGesture {
+                        withAnimation(.spring()) {
+                            self.angle = progress * 360
+                        }
+                    }
+                }
+        }
+        .onAppear {
+            self.angle = progress * 360
         }
         .padding(40)
     }
 }
 
 enum CircularSliderUnit: String, CaseIterable {
+    case none = "0n"
     case seconds = "60s"
     case minutes = "60m"
     case hours = "12h"
@@ -133,6 +148,7 @@ extension CircularSliderUnit {
     
     var name: String {
         switch self {
+        case .none: "none"
         case .seconds: "seconds"
         case .minutes: "minutes"
         case .hours: "hours"
@@ -144,12 +160,25 @@ extension CircularSliderUnit {
     
     var component: Calendar.Component {
         switch self {
+        case .none: .second
         case .seconds: .second
         case .minutes: .minute
         case .hours: .hour
         case .days: .day
         case .months: .month
         case .years: .year
+        }
+    }
+    
+    var intervalMultiplier: Double {
+        switch self {
+        case .none: 0
+        case .seconds: 1
+        case .minutes: 60
+        case .hours: 3600
+        case .days: 86400
+        case .months: 0
+        case .years: 0
         }
     }
 }
