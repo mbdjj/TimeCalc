@@ -24,25 +24,57 @@ struct TimerView: View {
     
     var body: some View {
         ZStack {
-            CircularSlider(progress: timerSet ? $timerProgress : $progress, unit: timerSet ? .constant(.none) : $unit, increase: $increase, allowGesture: !timerSet) {
-                withAnimation {
-                    timerSet = true
-                    let sliderValue = floor(abs(progress * Double(unit.intValue) * unit.intervalMultiplier))
-                    print(sliderValue)
-                    initialCount = sliderValue
-                    count = sliderValue
-                }
-            }
-            .onReceive(timer) { _ in
-                withAnimation {
-                    if count > 0 {
-                        count -= 1
-                    } else {
-                        timerSet = false
+            VStack {
+                CircularSlider(
+                    progress: timerSet ? $timerProgress : $progress,
+                    unit: timerSet ? .constant(.none) : $unit,
+                    increase: $increase,
+                    allowGesture: !timerSet
+                ) {
+                    withAnimation {
+                        timerSet = true
+                        let sliderValue = floor(abs(progress * Double(unit.intValue))) * unit.intervalMultiplier
+                        print(sliderValue)
+                        initialCount = sliderValue
+                        count = sliderValue
                     }
                 }
+                .onReceive(timer) { _ in
+                    withAnimation {
+                        if count > 0 {
+                            count -= 1
+                        } else {
+                            timerSet = false
+                        }
+                    }
+                }
+                
+                if !timerSet {
+                    SliderUnitButtons(sliderUnit: $unit, unitOptions: .timeOnly)
+                } else {
+                    HStack {
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "xmark")
+                                .font(.title)
+                        }
+                        .buttonStyle(.bordered)
+                        .buttonBorderShape(.circle)
+                        .padding(.trailing, 100)
+                        
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "pause.fill")
+                                .font(.title)
+                        }
+                        .buttonStyle(.bordered)
+                        .buttonBorderShape(.circle)
+                    }
+                    Spacer()
+                }
             }
-            .offset(y: timerSet ? -100 : 0)
         }
         .navigationTitle("Timer")
         .onChange(of: count) { _, _ in

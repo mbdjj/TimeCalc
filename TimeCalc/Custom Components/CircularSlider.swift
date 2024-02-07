@@ -47,6 +47,7 @@ struct CircularSlider: View {
                 .stroke(Color.green.opacity(0.5), style: StrokeStyle(lineWidth: 40, lineCap: .round, lineJoin: .round))
                 .frame(width: size, height: size)
                 .rotationEffect(.degrees(-90))
+                .animation(.spring, value: progress)
             
             if progress <= 0 {
                 Circle()
