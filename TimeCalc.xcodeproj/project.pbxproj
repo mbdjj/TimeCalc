@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		341B4EB42BBDD35500EAB0B3 /* DateAndTimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341B4EB32BBDD35500EAB0B3 /* DateAndTimeManager.swift */; };
+		341B4EB62BBDD6C000EAB0B3 /* CommandLineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341B4EB52BBDD6C000EAB0B3 /* CommandLineViewModel.swift */; };
+		341B4EB82BBDD79000EAB0B3 /* CommandItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341B4EB72BBDD79000EAB0B3 /* CommandItem.swift */; };
+		341B4EBA2BBDEDA000EAB0B3 /* CommandResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341B4EB92BBDEDA000EAB0B3 /* CommandResult.swift */; };
 		34368D212B068DAB005E434F /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34368D202B068DAB005E434F /* NotificationManager.swift */; };
 		34368D232B069CCE005E434F /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34368D222B069CCE005E434F /* NotificationView.swift */; };
 		3436F1682AF227B000A3507E /* DateDifferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3436F1672AF227B000A3507E /* DateDifferenceView.swift */; };
@@ -29,6 +33,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		341B4EB32BBDD35500EAB0B3 /* DateAndTimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeManager.swift; sourceTree = "<group>"; };
+		341B4EB52BBDD6C000EAB0B3 /* CommandLineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineViewModel.swift; sourceTree = "<group>"; };
+		341B4EB72BBDD79000EAB0B3 /* CommandItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandItem.swift; sourceTree = "<group>"; };
+		341B4EB92BBDEDA000EAB0B3 /* CommandResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandResult.swift; sourceTree = "<group>"; };
 		34368D202B068DAB005E434F /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		34368D222B069CCE005E434F /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		3436F1672AF227B000A3507E /* DateDifferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDifferenceView.swift; sourceTree = "<group>"; };
@@ -85,6 +93,7 @@
 				3485CAE92AFCC77E00B319C6 /* Info.plist */,
 				3472FB452A911C2C00B435CB /* TimeCalcApp.swift */,
 				34368D202B068DAB005E434F /* NotificationManager.swift */,
+				341B4EB32BBDD35500EAB0B3 /* DateAndTimeManager.swift */,
 				349E9A902AF1438800E20AFB /* Model */,
 				34E411A82A91CD1600F95F19 /* View */,
 				34E411AA2A91CD3800F95F19 /* ViewModel */,
@@ -108,6 +117,8 @@
 			children = (
 				349BEF7E2AB5FAB200B2428E /* CalcHistoryItem.swift */,
 				3436F16B2AF22CAF00A3507E /* DateDiffItem.swift */,
+				341B4EB72BBDD79000EAB0B3 /* CommandItem.swift */,
+				341B4EB92BBDEDA000EAB0B3 /* CommandResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,6 +151,7 @@
 		34E411AA2A91CD3800F95F19 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				341B4EB52BBDD6C000EAB0B3 /* CommandLineViewModel.swift */,
 				34E411A62A91CD1000F95F19 /* TimeDialViewModel.swift */,
 				3436F1692AF22B3B00A3507E /* DateDifferenceViewModel.swift */,
 			);
@@ -216,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				341B4EB42BBDD35500EAB0B3 /* DateAndTimeManager.swift in Sources */,
 				349E9A8F2AF13F7400E20AFB /* MainMenuView.swift in Sources */,
 				34E411A72A91CD1000F95F19 /* TimeDialViewModel.swift in Sources */,
 				3436F16C2AF22CAF00A3507E /* DateDiffItem.swift in Sources */,
@@ -223,7 +236,9 @@
 				349BEF7D2AB5F93000B2428E /* CalculationHistoryView.swift in Sources */,
 				343A85732BBDCC4800A3A603 /* CommandLineView.swift in Sources */,
 				349BEF7F2AB5FAB200B2428E /* CalcHistoryItem.swift in Sources */,
+				341B4EB62BBDD6C000EAB0B3 /* CommandLineViewModel.swift in Sources */,
 				3472FB482A911C2C00B435CB /* TimeDialView.swift in Sources */,
+				341B4EB82BBDD79000EAB0B3 /* CommandItem.swift in Sources */,
 				34811AF62AF3869F00EA0CA4 /* TimerView.swift in Sources */,
 				3472FB462A911C2C00B435CB /* TimeCalcApp.swift in Sources */,
 				3472FB542A911C6000B435CB /* CircularSlider.swift in Sources */,
@@ -231,6 +246,7 @@
 				345DE4562AB830CA00228BCB /* CalcHistoryMainCell.swift in Sources */,
 				3436F16A2AF22B3B00A3507E /* DateDifferenceViewModel.swift in Sources */,
 				34368D212B068DAB005E434F /* NotificationManager.swift in Sources */,
+				341B4EBA2BBDEDA000EAB0B3 /* CommandResult.swift in Sources */,
 				34F492CF2A98959B00A8E203 /* SliderUnitButtons.swift in Sources */,
 				3436F1682AF227B000A3507E /* DateDifferenceView.swift in Sources */,
 			);

@@ -27,7 +27,7 @@ import SwiftUI
     var notificationAvailable: Bool { timeDate < .now }
     
     @MainActor func addToDate(_ value: Double, unit: Calendar.Component) {
-        timeDate = Calendar.current.date(byAdding: unit, value: Int(value), to: timeDate) ?? .now
+        timeDate = DateAndTimeManager.addTo(timeDate, component: unit, value: Int(value))
     }
     
     func clearHistory() {
