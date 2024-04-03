@@ -15,6 +15,9 @@ struct MainMenuView: View {
         NavigationStack(path: $path) {
             List {
                 Section {
+                    NavigationLink(value: AppDestination.consoleView) {
+                        Label("Command line", systemImage: "apple.terminal")
+                    }
                     NavigationLink(value: AppDestination.timeDialView) {
                         Label("Time dial", systemImage: "dial.medium")
                     }
@@ -47,6 +50,8 @@ struct MainMenuView: View {
                     TimerView()
                 case .manageNotifications:
                     NotificationView()
+                case .consoleView:
+                    CommandLineView()
                 }
             }
         }
@@ -61,6 +66,7 @@ enum AppDestination {
     case timeDialView
     case dateDifferenceView
     case timerView
+    case consoleView
     
     // Extras
     case manageNotifications
