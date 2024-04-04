@@ -23,18 +23,36 @@ import Foundation
             return CommandDateItem(content)
         case "diff":
             return CommandFunctionItem(content)
+        case let s where CommandComponentItem.possible.contains(s):
+            return CommandComponentItem(content)
         default:
             return CommandItem(content)
         }
     }
     
     func decodeResult(items: [CommandItem]) -> CommandResult? {
+        resultType = CommandResult.self
         if items.matches(pattern: [.function, .date, .date]) {
             guard (items[0] as! CommandFunctionItem).type == .dateDiff else {
                 resultType = CommandResult.self
                 return nil
             }
-            let components = DateAndTimeManager.dateDiff((items[1] as! CommandDateItem).date, (items[2] as! CommandDateItem).date, components: [.year, .month, .day])
+            let lhs = items[1] as! CommandDateItem
+            let rhs = items[2] as! CommandDateItem
+            
+            let components = DateAndTimeManager.dateDiff(lhs.date, rhs.date, components: [.day])
+            resultType = CommandComponentResult.self
+            return CommandComponentResult(components: components)
+        } else if items .matches(pattern: [.function, .date, .date, .component]) {
+            guard (items[0] as! CommandFunctionItem).type == .dateDiff else {
+                resultType = CommandResult.self
+                return nil
+            }
+            let lhs = items[1] as! CommandDateItem
+            let rhs = items[2] as! CommandDateItem
+            let comp = items[3] as! CommandComponentItem
+            
+            let components = DateAndTimeManager.dateDiff(lhs.date, rhs.date, components: comp.components)
             resultType = CommandComponentResult.self
             return CommandComponentResult(components: components)
         } else {
@@ -52,7 +70,7 @@ extension String {
 
 extension [CommandItem] {
     func matches(pattern: [CommandItemType]) -> Bool {
-        if self.count < pattern.count { return false }
+        if self.count != pattern.count { return false }
         
         let match = zip(self, pattern)
             .map { type(of: $0) == $1.type.self }

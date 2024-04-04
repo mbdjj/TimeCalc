@@ -13,8 +13,29 @@ struct CommandLineView: View {
     
     var body: some View {
         List {
-            if model.resultType == CommandComponentResult.self {
-                Text("\((model.result as! CommandComponentResult).components.day ?? 0) days")
+            Section {
+                VStack {
+                    if let res = model.result as? CommandComponentResult {
+                        if let year = res.components.year {
+                            Text("\(Int(abs(year))) years")
+                        }
+                        if let month = res.components.month {
+                            Text("\(Int(abs(month))) months")
+                        }
+                        if let day = res.components.day {
+                            Text("\(Int(abs(day))) days")
+                        }
+                        if let hour = res.components.hour {
+                            Text("\(Int(abs(hour))) hours")
+                        }
+                        if let minute = res.components.minute {
+                            Text("\(Int(abs(minute))) minutes")
+                        }
+                        if let second = res.components.second {
+                            Text("\(Int(abs(second))) seconds")
+                        }
+                    }
+                }
             }
             
             TextField("Command", text: $model.command)

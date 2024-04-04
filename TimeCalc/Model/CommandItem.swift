@@ -64,8 +64,31 @@ class CommandFunctionItem: CommandItem {
 class CommandComponentItem: CommandItem {
     let components: Set<Calendar.Component>
     
+    static let possible = ["all", "date", "time", "year", "month", "day", "hour", "minute", "second"]
+    
     override init(_ content: String) {
-        self.components = [.day]
+        switch content {
+        case "all":
+            self.components = [.year, .month, .day, .hour, .minute, .second]
+        case "date":
+            self.components = [.year, .month, .day]
+        case "time":
+            self.components = [.hour, .minute, .second]
+        case "year":
+            self.components = [.year]
+        case "month":
+            self.components = [.month]
+        case "day":
+            self.components = [.day]
+        case "hour":
+            self.components = [.hour]
+        case "minute":
+            self.components = [.minute]
+        case "second":
+            self.components = [.second]
+        default:
+            self.components = []
+        }
         super.init(content)
     }
 }
@@ -74,6 +97,7 @@ enum CommandItemType {
     case none
     case date
     case function
+    case component
     
     var type: CommandItem.Type {
         switch self {
@@ -83,6 +107,8 @@ enum CommandItemType {
             CommandDateItem.self
         case .function:
             CommandFunctionItem.self
+        case .component:
+            CommandComponentItem.self
         }
     }
 }
