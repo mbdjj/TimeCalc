@@ -61,6 +61,15 @@ class CommandFunctionItem: CommandItem {
     }
 }
 
+class CommandNumberItem: CommandItem {
+    let value: Int
+    
+    override init(_ content: String) {
+        self.value = Int(content) ?? 0
+        super.init(content)
+    }
+}
+
 class CommandComponentItem: CommandItem {
     let components: Set<Calendar.Component>
     
@@ -98,6 +107,7 @@ enum CommandItemType {
     case date
     case function
     case component
+    case number
     
     var type: CommandItem.Type {
         switch self {
@@ -109,6 +119,8 @@ enum CommandItemType {
             CommandFunctionItem.self
         case .component:
             CommandComponentItem.self
+        case .number:
+            CommandNumberItem.self
         }
     }
 }

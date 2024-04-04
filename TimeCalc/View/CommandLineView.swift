@@ -34,6 +34,8 @@ struct CommandLineView: View {
                         if let second = res.components.second {
                             Text("\(Int(abs(second))) seconds")
                         }
+                    } else if let res = model.result as? CommandDateResult {
+                        Text(res.date.formatted(date: .abbreviated, time: .standard))
                     }
                 }
             }
@@ -47,7 +49,7 @@ struct CommandLineView: View {
             print(model.commandStringItems)
             print(model.commandItems)
             print(model.commandItems.matches(pattern: [.function, .date, .date]))
-            print(model.resultType)
+            print(type(of: model.result))
             print(model.result)
         }
     }

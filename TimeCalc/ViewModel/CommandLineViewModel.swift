@@ -13,7 +13,6 @@ import Foundation
     var commandItems: [CommandItem] { commandStringItems.map { decodeCommandItem($0) } }
     
     var result: CommandResult? { decodeResult(items: commandItems) }
-    var resultType: CommandResult.Type = CommandResult.self
     
     func decodeCommandItem(_ content: String) -> CommandItem {
         switch content {
@@ -21,31 +20,29 @@ import Foundation
             return CommandDateItem(content, date: .now)
         case let s where s.matches(/\d{4}-\d{2}-\d{2}/):
             return CommandDateItem(content)
-        case "diff":
+        case let s where ["diff", "+", "-"].contains(s):
             return CommandFunctionItem(content)
         case let s where CommandComponentItem.possible.contains(s):
             return CommandComponentItem(content)
+        case let s where s.matches(/\d{1,}/):
+            return CommandNumberItem(content)
         default:
             return CommandItem(content)
         }
     }
     
     func decodeResult(items: [CommandItem]) -> CommandResult? {
-        resultType = CommandResult.self
         if items.matches(pattern: [.function, .date, .date]) {
             guard (items[0] as! CommandFunctionItem).type == .dateDiff else {
-                resultType = CommandResult.self
                 return nil
             }
             let lhs = items[1] as! CommandDateItem
             let rhs = items[2] as! CommandDateItem
             
             let components = DateAndTimeManager.dateDiff(lhs.date, rhs.date, components: [.day])
-            resultType = CommandComponentResult.self
             return CommandComponentResult(components: components)
-        } else if items .matches(pattern: [.function, .date, .date, .component]) {
+        } else if items.matches(pattern: [.function, .date, .date, .component]) {
             guard (items[0] as! CommandFunctionItem).type == .dateDiff else {
-                resultType = CommandResult.self
                 return nil
             }
             let lhs = items[1] as! CommandDateItem
@@ -53,12 +50,22 @@ import Foundation
             let comp = items[3] as! CommandComponentItem
             
             let components = DateAndTimeManager.dateDiff(lhs.date, rhs.date, components: comp.components)
-            resultType = CommandComponentResult.self
             return CommandComponentResult(components: components)
-        } else {
-            resultType = CommandResult.self
-            return nil
+        } else if items.matches(pattern: [.date, .function, .number, .component]) {
+            guard (items[1] as! CommandFunctionItem).type == .dateAdd else {
+                return nil
+            }
+            
+            let lhs = items[0] as! CommandDateItem
+            let sign = items[1] as! CommandFunctionItem
+            let num = items[2] as! CommandNumberItem
+            let comp = items[3] as! CommandComponentItem
+            
+            let value = sign.content == "-" ? num.value * -1 : num.value
+            let date = DateAndTimeManager.addTo(lhs.date, component: comp.components.first ?? .day, value: value)
+            return CommandDateResult(date: date)
         }
+        return nil
     }
 }
 

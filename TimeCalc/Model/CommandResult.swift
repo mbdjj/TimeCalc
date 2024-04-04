@@ -23,3 +23,12 @@ class CommandComponentResult: CommandResult {
         super.init("Components")
     }
 }
+
+class CommandDateResult: CommandResult {
+    let date: Date
+    
+    init(date: Date) {
+        self.date = date
+        super.init("Date")
+    }
+}
